@@ -146,7 +146,7 @@ var htmlText3 = `
         </header> 
         <form class="share-form hidden" method="post" action="./">
         <p class=weather>Active Wind Mode: </p>
-        <p class="weather" id="replace-me" style="color: blue">WEST EDDM RWY 26</p>
+        <p class="weather" id="replace-me" style="color: blue">EAST EDDM RWY 08</p>
         <div>
         <button type="button" class="select" id="cwm">Change Wind Mode</button>
         </div>
@@ -155,10 +155,12 @@ var htmlText3 = `
         <br /><br />
         <select class="select" name="airspaces" id="loc">
             <option value="00" disabled selected hidden>Airspace...</option>
-            <option value="w1">All WestWind Airspaces</option>
-            <option value="w2">DACOSH-C</option>
-            <option value="w3">DACOSH-E</option>
-            <option value="w4">DACOSH-W</option>
+            <option value="e1">All EastWind Airspaces</option>    
+            <option value="e2">NG</option>
+            <option value="e3">NX</option>
+            <option value="e4">MD</option>
+            <option value="e5">MJ</option>
+            <option value="e6">MM</option>
         </select>
         <br /><br />
         <select class="select" name="status" id="stat">
@@ -176,7 +178,7 @@ var htmlText3 = `
           <p class="weatherLegend">Status</p>
           <p class="weatherLegend">Max Altitude/FL</p>
         </div>`;
-var htmlTextE = `  
+var htmlTextEE = `  
     </div>
  </body>
   <script>
@@ -281,14 +283,14 @@ var htmlTextE = `
         console.log(locValue);
     });
 
-  setTimeout(() => {document.location.reload();},120000);
-
+    setTimeout(() => {document.location.reload();},120000);
+  
   </script>
  
 </html>
 `;
 
-var htmlTextG = htmlText1 + htmlText2 + htmlText3;
+var htmlTextGE = htmlText1 + htmlText2 + htmlText3;
 //var htmlTextE = htmlText5;
 
-module.exports = { htmlTextG, htmlTextE };
+module.exports = { htmlTextGE, htmlTextEE };

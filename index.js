@@ -1,9 +1,11 @@
 const http = require("http");
 const { htmlTextG, htmlTextE } = require("./htmlPageApp");
+const { htmlTextGE, htmlTextEE } = require("./htmlPageAppEast");
 const {
   checkBody,
   transformBody,
   presentAirTableData,
+  windMode,
 } = require("./manageAirspace");
 /*
     const { checkBody, transformBody, setBodyData } = require("./manageBody");
@@ -18,9 +20,12 @@ const {
 var curInp = "";
 var htmlData = "";
 var htmlTextData = "";
+var windM = "w";
 
 const server = http.createServer((req, res) => {
   console.log("Incoming message");
+  console.log("windMode: ");
+  console.log(windM);
   //console.log(`${__dirname}`);
   /*var body = "";*/
 
@@ -28,8 +33,15 @@ const server = http.createServer((req, res) => {
     //console.log(req.method);
     res.writeHeader(200, { "Content-Type": "text/html" });
     //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
-    output = htmlTextG + htmlTextE;
-    res.end(output);
+    if (windM == "w") {
+      htmlTextData = htmlTextG + htmlData + htmlTextE;
+      console.log("HEREE West");
+    }
+    if (windM == "e") {
+      htmlTextData = htmlTextGE + htmlData + htmlTextEE;
+      console.log("HEREE East");
+    }
+    res.end(htmlTextData);
   }
 
   if (req.method == "POST") {
@@ -47,12 +59,17 @@ const server = http.createServer((req, res) => {
       //checkInput
 
       if (checkBody(curInp) == true) {
-        transformBody(curInp);
+        windM = transformBody(curInp);
       }
 
       htmlData = presentAirTableData();
       //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
-      htmlTextData = htmlTextG + htmlData + htmlTextE;
+      if (windM == "w") {
+        htmlTextData = htmlTextG + htmlData + htmlTextE;
+      }
+      if (windM == "e") {
+        htmlTextData = htmlTextGE + htmlData + htmlTextEE;
+      }
       res.writeHeader(200, { "Content-Type": "text/html" });
       //console.log(htmlTextData);
       res.end(htmlTextData);

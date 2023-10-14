@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h1 id="id01">Old Heading</h1>
+    <button id="cwm">Change Wind Mode</button>
+
+    <script>
+        let windMode = "west";
+        let statIn = false;
+        const cwmbtn = document.getElementById("cwm");
+        let element = document.getElementById("id01");
+        cwmbtn.addEventListener("click", function() {
+            console.log(element.innerHTML);
+            if (windMode == "west" && statIn == false) {
+                element.innerHTML = "East";
+                windMode = "east";
+                statIn = true;
+            }
+            if (windMode == "east" && statIn == false) {
+                element.innerHTML = "West";
+                windMode = "west";
+                statIn = true;
+            }
+            statIn = false;
+        });
+    </script>
+</body>
+
+</html>

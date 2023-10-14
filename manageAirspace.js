@@ -1,19 +1,19 @@
 var validInpStatus = false;
 var i = 0;
 var j = 0;
+var windMode = "w";
 
 var airDictData = {
-  "01": "All Airspaces",
-  "02": "All EastWind Airspaces",
-  "03": "All WestWind Airspaces",
-  "04": "DACOSH-C",
-  "05": "DACOSH-E",
-  "06": "DACOSH-W",
-  "07": "NG",
-  "08": "NX",
-  "09": "MD",
-  10: "MJ",
-  11: "MM",
+  e1: "All EastWind Airspaces",
+  w1: "All WestWind Airspaces",
+  w2: "DACOSH-C",
+  w3: "DACOSH-E",
+  w4: "DACOSH-W",
+  e2: "NG",
+  e3: "NX",
+  e4: "MD",
+  e5: "MJ",
+  e6: "MM",
 };
 
 var statDict = {
@@ -52,90 +52,117 @@ function transformBody(dataString) {
   //console.log(dataString.length);
   let airPos = "";
   let statPos = "";
+
   //console.log(dataString.substring(10, 12));
   //console.log(dataString.substring(20, 22));
   airPos = dataString.substring(10, 12);
   statPos = dataString.substring(20, 22);
 
+  console.log("---valid for transform---");
   console.log("airPos: ");
   console.log(airPos);
+
+  console.log(airPos.substring(0, 1));
+  windMode = airPos.substring(0, 1);
+
+  console.log("windMode: ");
+  console.log(windMode);
 
   console.log("statPos: ");
   console.log(statPos);
 
-  //console.log(airDictData[airPos]);
+  //set corresponding status for single airspace
   for (i = 0; i < airTableData.length; i++) {
     if (airTableData[i][0] == airDictData[airPos]) {
       airTableData[i][1] = statDict[statPos];
     }
   }
 
-  if (airPos == "01") {
-    for (i = 0; i < airTableData.length; i++) {
+  //set corresponding status for all west airspaces
+  if (airPos == "w1") {
+    for (i = 0; i < 3; i++) {
       airTableData[i][1] = statDict[statPos];
     }
   }
 
-  if (airPos == "02") {
-    for (i = 0; i < airTableData.length; i++) {
-      if (
-        airTableData[i][0].includes("N") ||
-        airTableData[i][0].includes("M")
-      ) {
-        airTableData[i][1] = statDict[statPos];
-      }
+  //set corresponding status for all east airspaces
+  if (airPos == "e1") {
+    for (i = 3; i < airTableData.length; i++) {
+      airTableData[i][1] = statDict[statPos];
     }
   }
-
-  if (airPos == "03") {
-    for (i = 0; i < airTableData.length; i++) {
-      if (airTableData[i][0].includes("DACOSH")) {
-        airTableData[i][1] = statDict[statPos];
-      }
-    }
-  }
-
   console.log(airTableData);
+  return windMode;
 }
 
 function presentAirTableData() {
   let tempHTML = "";
   let tempStr = "";
   tempHTML = `<div class="weatherTable">`;
-  for (j = 0; j < airTableData.length; j++) {
-    if (airTableData[j][1] == "active") {
-      for (i = 0; i < 3; i++) {
-        tempStr = airTableData[j][i];
-        tempHTML =
-          tempHTML +
-          `<p class="weatherLegend" style="color: green">` +
-          tempStr +
-          `</p>`;
-      }
-    }
 
-    if (airTableData[j][1] == "inactive") {
-      for (i = 0; i < 3; i++) {
-        tempStr = airTableData[j][i];
-        tempHTML =
-          tempHTML +
-          `<p class="weatherLegend" style="color: orange">` +
-          tempStr +
-          `</p>`;
+  if (windMode == "w") {
+    for (j = 0; j < 3; j++) {
+      if (airTableData[j][1] == "active") {
+        for (i = 0; i < 3; i++) {
+          tempStr = airTableData[j][i];
+          tempHTML =
+            tempHTML +
+            `<p class="weatherLegend" style="color: green">` +
+            tempStr +
+            `</p>`;
+        }
+      }
+
+      if (airTableData[j][1] == "inactive") {
+        for (i = 0; i < 3; i++) {
+          tempStr = airTableData[j][i];
+          tempHTML =
+            tempHTML +
+            `<p class="weatherLegend" style="color: red">` +
+            tempStr +
+            `</p>`;
+        }
       }
     }
   }
+
+  if (windMode == "e") {
+    for (j = 3; j < airTableData.length; j++) {
+      if (airTableData[j][1] == "active") {
+        for (i = 0; i < 3; i++) {
+          tempStr = airTableData[j][i];
+          tempHTML =
+            tempHTML +
+            `<p class="weatherLegend" style="color: green">` +
+            tempStr +
+            `</p>`;
+        }
+      }
+
+      if (airTableData[j][1] == "inactive") {
+        for (i = 0; i < 3; i++) {
+          tempStr = airTableData[j][i];
+          tempHTML =
+            tempHTML +
+            `<p class="weatherLegend" style="color: red">` +
+            tempStr +
+            `</p>`;
+        }
+      }
+    }
+  }
+
   tempHTML = tempHTML + `</div>`;
 
   const cuDate = new Date();
-  tempHTML =
-    tempHTML + `<b>` + "\tLast update at: " + cuDate.toString() + `</b>`;
+  tempHTML = tempHTML + `<b>` + "\tLast update: " + cuDate.toString() + `</b>`;
 
   tempHTML =
     tempHTML +
-    `<b style="color:red;">` +
-    "Please note: This airspace data is purely informative and does not replace the communication with the responsible air traffic control." +
+    `<b>` +
+    "  Please note: This airspace data is purely informative and does not replace the communication with the responsible air traffic control." +
     `</b>`;
+
   return tempHTML;
 }
 
