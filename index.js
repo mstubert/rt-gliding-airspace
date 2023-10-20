@@ -7,6 +7,8 @@ const {
   presentAirTableData,
   windMode,
 } = require("./manageAirspace");
+
+const { htmlTextGP, htmlTextEP } = require("./htmlPagePilot");
 /*
     const { checkBody, transformBody, setBodyData } = require("./manageBody");
     const {
@@ -30,18 +32,26 @@ const server = http.createServer((req, res) => {
   /*var body = "";*/
 
   if (req.method == "GET") {
-    //console.log(req.method);
-    res.writeHeader(200, { "Content-Type": "text/html" });
-    //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
-    if (windM == "w") {
-      htmlTextData = htmlTextG + htmlData + htmlTextE;
-      console.log("HEREE West");
+    var url = req.url;
+    htmlData = presentAirTableData();
+    if (url === "/admin") {
+      //console.log(req.method);
+      res.writeHeader(200, { "Content-Type": "text/html" });
+      //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
+      if (windM == "w") {
+        htmlTextData = htmlTextG + htmlData + htmlTextE;
+        console.log("HEREE West");
+      }
+      if (windM == "e") {
+        htmlTextData = htmlTextGE + htmlData + htmlTextEE;
+        console.log("HEREE East");
+      }
+      res.end(htmlTextData);
+    } else {
+      res.writeHeader(200, { "Content-Type": "text/html" });
+      htmlTextData = htmlTextGP + htmlData + htmlTextEP;
+      res.end(htmlTextData);
     }
-    if (windM == "e") {
-      htmlTextData = htmlTextGE + htmlData + htmlTextEE;
-      console.log("HEREE East");
-    }
-    res.end(htmlTextData);
   }
 
   if (req.method == "POST") {
