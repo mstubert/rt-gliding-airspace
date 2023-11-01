@@ -118,7 +118,7 @@ var htmlText1 = `
           .weatherTable {
             background: linear-gradient(to right, #d6d3d1, #f9fafc);
             color: #1c1917;
-            font-size: 15px;
+            font-size: 17px;
             border-radius: 15px;
             margin: 5px;
             padding: 20px;
