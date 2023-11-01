@@ -16,7 +16,7 @@ var htmlText1 = `
     <meta charset = "UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content = "width=device-width, initial-scale=1.0" />
-    <title>Real Time Gliding Airspace</title> 
+    <title>ACD Gliding Airspace</title> 
     <style>
         body {
             /*height: 100vh;*/
@@ -140,7 +140,7 @@ var htmlText1 = `
 var htmlText2 = initPic + convPic + endPic;
 
 var htmlText3 = `
-            <h1>Real Time Gliding Airspace</h1>
+            <h1>ACD Gliding Airspace</h1>
           </div> 
           <button class="glob-button"> Share Airspace Status </button> 
         </header> 
