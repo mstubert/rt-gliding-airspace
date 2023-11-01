@@ -22,8 +22,8 @@ var statDict = {
 };
 
 var airTableData = [
-  ["DACOSH-C", "inactive", "A5.5,FL065,FL075"],
-  ["DACOSH-E", "inactive", "A5.5,FL065,FL075"],
+  ["DACOSH-C", "inactive", "A5.5,FL065/075"],
+  ["DACOSH-E", "inactive", "A5.5,FL065/075"],
   ["DACOSH-W", "inactive", "FL065"],
   ["NG", "inactive", "A4.5"],
   ["NX", "inactive", "A5.5"],
