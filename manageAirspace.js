@@ -167,4 +167,79 @@ function presentAirTableData() {
   return tempHTML;
 }
 
-module.exports = { checkBody, transformBody, presentAirTableData };
+function presentAirTablePostData() {
+  let tempHTML = "";
+  let tempStr = "";
+  tempHTML = `<div class="weatherTable">`;
+
+  if (windMode == "w") {
+    for (j = 0; j < 3; j++) {
+      if (airTableData[j][1] == "active") {
+        for (i = 0; i < 3; i++) {
+          tempStr = airTableData[j][i];
+          tempHTML =
+            tempHTML +
+            `<p class="weatherLegend" style="color: green">` +
+            tempStr +
+            `</p>`;
+        }
+      }
+
+      if (airTableData[j][1] == "inactive") {
+        for (i = 0; i < 3; i++) {
+          tempStr = airTableData[j][i];
+          tempHTML =
+            tempHTML +
+            `<p class="weatherLegend" style="color: red">` +
+            tempStr +
+            `</p>`;
+        }
+      }
+    }
+  }
+
+  if (windMode == "e") {
+    for (j = 3; j < airTableData.length; j++) {
+      if (airTableData[j][1] == "active") {
+        for (i = 0; i < 3; i++) {
+          tempStr = airTableData[j][i];
+          tempHTML =
+            tempHTML +
+            `<p class="weatherLegend" style="color: green">` +
+            tempStr +
+            `</p>`;
+        }
+      }
+
+      if (airTableData[j][1] == "inactive") {
+        for (i = 0; i < 3; i++) {
+          tempStr = airTableData[j][i];
+          tempHTML =
+            tempHTML +
+            `<p class="weatherLegend" style="color: red">` +
+            tempStr +
+            `</p>`;
+        }
+      }
+    }
+  }
+
+  tempHTML = tempHTML + `</div>`;
+
+  const cuDate = new Date();
+  tempHTML =
+    tempHTML +
+    `<b>` +
+    "\tLast airspace update from this client: " +
+    cuDate.toString() +
+    `</b>`;
+
+  return tempHTML;
+}
+
+module.exports = {
+  checkBody,
+  transformBody,
+  presentAirTableData,
+  presentAirTablePostData,
+};

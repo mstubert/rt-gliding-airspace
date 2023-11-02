@@ -283,7 +283,7 @@ var htmlTextEE = `
         console.log(locValue);
     });
 
-    setTimeout(() => {document.location.reload();},120000);
+    
   
   </script>
  
@@ -294,3 +294,5 @@ var htmlTextGE = htmlText1 + htmlText2 + htmlText3;
 //var htmlTextE = htmlText5;
 
 module.exports = { htmlTextGE, htmlTextEE };
+
+//setTimeout(() => {document.location.reload();},120000); Before end of >/script>

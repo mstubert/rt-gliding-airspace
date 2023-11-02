@@ -5,19 +5,11 @@ const {
   checkBody,
   transformBody,
   presentAirTableData,
+  presentAirTablePostData,
   windMode,
 } = require("./manageAirspace");
 
 const { htmlTextGP, htmlTextEP } = require("./htmlPagePilot");
-/*
-    const { checkBody, transformBody, setBodyData } = require("./manageBody");
-    const {
-        addNewLocItem,
-        updateTimeLocData,
-        updateAverageLocData,
-        presentWeatherData,
-    } = require("./manageWeather");
-    */
 
 var curInp = "";
 var htmlData = "";
@@ -72,26 +64,36 @@ const server = http.createServer((req, res) => {
         windM = transformBody(curInp);
       }
 
-      htmlData = presentAirTableData();
-      /*
-                        //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
-                        if (windM == "w") {
-                          htmlTextData = htmlTextG + htmlData + htmlTextE;
-                        }
-                        if (windM == "e") {
-                          htmlTextData = htmlTextGE + htmlData + htmlTextEE;
-                        }
-                        res.writeHeader(200, { "Content-Type": "text/html" });
-                        //console.log(htmlTextData);
-                        res.end(htmlTextData);
-                        */
+      htmlData = presentAirTablePostData();
+
+      //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
+      if (windM == "w") {
+        htmlTextData = htmlTextG + htmlData + htmlTextE;
+      }
+      if (windM == "e") {
+        htmlTextData = htmlTextGE + htmlData + htmlTextEE;
+      }
       res.writeHeader(200, { "Content-Type": "text/html" });
-      htmlTextData = htmlTextGP + htmlData + htmlTextEP;
+      //console.log(htmlTextData);
       res.end(htmlTextData);
+
+      /*
+                              res.writeHeader(200, { "Content-Type": "text/html" });
+                              htmlTextData = htmlTextGP + htmlData + htmlTextEP;
+                              res.end(htmlTextData);
+                              */
     });
   }
 });
 
+const port = process.env.PORT || 8000;
+server.listen(port, () => {
+  console.log("Listen to requests on port: ");
+  console.log(port);
+});
+
+/*
 server.listen(8000, "127.0.0.1", () => {
   console.log("Listen to requests on port 8000");
 });
+*/

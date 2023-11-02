@@ -281,7 +281,7 @@ var htmlTextE = `
         console.log(locValue);
     });
 
-  setTimeout(() => {document.location.reload();},120000);
+  
 
   </script>
  
@@ -292,3 +292,5 @@ var htmlTextG = htmlText1 + htmlText2 + htmlText3;
 //var htmlTextE = htmlText5;
 
 module.exports = { htmlTextG, htmlTextE };
+
+//setTimeout(() => {document.location.reload();},120000); Before end of >/script>
