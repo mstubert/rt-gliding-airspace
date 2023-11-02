@@ -90,22 +90,22 @@ const server = http.createServer((req, res) => {
       res.end(htmlTextData);
 
       /*
-                                                                                                                                                      res.writeHeader(200, { "Content-Type": "text/html" });
-                                                                                                                                                      htmlTextData = htmlTextGP + htmlData + htmlTextEP;
-                                                                                                                                                      res.end(htmlTextData);
-                                                                                                                                                      */
+                                                                                                                                                                  res.writeHeader(200, { "Content-Type": "text/html" });
+                                                                                                                                                                  htmlTextData = htmlTextGP + htmlData + htmlTextEP;
+                                                                                                                                                                  res.end(htmlTextData);
+                                                                                                                                                                  */
     });
   }
 });
 
+/*
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
   console.log("Listen to requests on port: ");
   console.log(port);
 });
+*/
 
-/*
 server.listen(8000, "127.0.0.1", () => {
   console.log("Listen to requests on port 8000");
 });
-*/
