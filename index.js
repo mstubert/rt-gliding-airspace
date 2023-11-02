@@ -6,8 +6,6 @@ const {
   transformBody,
   presentAirTableData,
   presentAirTablePostData,
-  airTableData,
-  windMode,
 } = require("./manageAirspace");
 
 const { htmlTextGP, htmlTextEP } = require("./htmlPagePilot");
@@ -16,6 +14,17 @@ var curInp = "";
 var htmlData = "";
 var htmlTextData = "";
 var windM = "w";
+
+var airTableDataServer = [
+  ["DACOSH-C", "inactive", "A5.5,FL065/075"],
+  ["DACOSH-E", "inactive", "A5.5,FL065/075"],
+  ["DACOSH-W", "inactive", "FL065"],
+  ["NG", "inactive", "A4.5"],
+  ["NX", "inactive", "A5.5"],
+  ["MD", "inactive", "A5.5"],
+  ["MJ", "inactive", "A5.5"],
+  ["MM", "inactive", "A4.5,FL065"],
+];
 
 const server = http.createServer((req, res) => {
   console.log("Incoming message");
@@ -26,20 +35,20 @@ const server = http.createServer((req, res) => {
 
   if (req.method == "GET") {
     var url = req.url;
-    htmlData = presentAirTableData();
-    console.log("Current Airspace Status in GET reqeust begin:");
-    console.log(airTableData);
+    htmlData = presentAirTableData(windM, airTableDataServer);
+    console.log("Current Airspace Status in GET request begin:");
+    console.log(airTableDataServer);
     if (url === "/admin") {
       //console.log(req.method);
       res.writeHeader(200, { "Content-Type": "text/html" });
       //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
       if (windM == "w") {
         htmlTextData = htmlTextG + htmlData + htmlTextE;
-        console.log("HEREE West");
+        console.log("HERE West");
       }
       if (windM == "e") {
         htmlTextData = htmlTextGE + htmlData + htmlTextEE;
-        console.log("HEREE East");
+        console.log("HERE East");
       }
       res.end(htmlTextData);
     } else {
@@ -64,10 +73,10 @@ const server = http.createServer((req, res) => {
       //checkInput
 
       if (checkBody(curInp) == true) {
-        windM = transformBody(curInp);
+        windM = transformBody(curInp, airTableDataServer);
       }
 
-      htmlData = presentAirTablePostData();
+      htmlData = presentAirTablePostData(windM, airTableDataServer);
 
       //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
       if (windM == "w") {
@@ -81,10 +90,10 @@ const server = http.createServer((req, res) => {
       res.end(htmlTextData);
 
       /*
-                                                      res.writeHeader(200, { "Content-Type": "text/html" });
-                                                      htmlTextData = htmlTextGP + htmlData + htmlTextEP;
-                                                      res.end(htmlTextData);
-                                                      */
+                                                                                                                                                      res.writeHeader(200, { "Content-Type": "text/html" });
+                                                                                                                                                      htmlTextData = htmlTextGP + htmlData + htmlTextEP;
+                                                                                                                                                      res.end(htmlTextData);
+                                                                                                                                                      */
     });
   }
 });

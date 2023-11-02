@@ -21,7 +21,7 @@ var statDict = {
   "02": "active",
 };
 
-var airTableData = [
+var airTableDataOM = [
   ["DACOSH-C", "inactive", "A5.5,FL065/075"],
   ["DACOSH-E", "inactive", "A5.5,FL065/075"],
   ["DACOSH-W", "inactive", "FL065"],
@@ -48,7 +48,7 @@ function checkBody(dataString) {
   return validInpStatus;
 }
 
-function transformBody(dataString) {
+function transformBody(dataString, airTableData) {
   //console.log(dataString.length);
   let airPos = "";
   let statPos = "";
@@ -96,10 +96,12 @@ function transformBody(dataString) {
   return windMode;
 }
 
-function presentAirTableData() {
+function presentAirTableData(wM, airTableData) {
   let tempHTML = "";
   let tempStr = "";
   tempHTML = `<div class="weatherTable">`;
+
+  windMode = wM;
 
   if (windMode == "w") {
     for (j = 0; j < 3; j++) {
@@ -167,10 +169,12 @@ function presentAirTableData() {
   return tempHTML;
 }
 
-function presentAirTablePostData() {
+function presentAirTablePostData(wM, airTableData) {
   let tempHTML = "";
   let tempStr = "";
   tempHTML = `<div class="weatherTable">`;
+
+  windMode = wM;
 
   if (windMode == "w") {
     for (j = 0; j < 3; j++) {
@@ -242,5 +246,4 @@ module.exports = {
   transformBody,
   presentAirTableData,
   presentAirTablePostData,
-  airTableData,
 };
