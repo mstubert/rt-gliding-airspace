@@ -242,4 +242,5 @@ module.exports = {
   transformBody,
   presentAirTableData,
   presentAirTablePostData,
+  airTableData,
 };

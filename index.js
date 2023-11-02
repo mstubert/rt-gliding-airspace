@@ -6,6 +6,7 @@ const {
   transformBody,
   presentAirTableData,
   presentAirTablePostData,
+  airTableData,
   windMode,
 } = require("./manageAirspace");
 
@@ -26,6 +27,8 @@ const server = http.createServer((req, res) => {
   if (req.method == "GET") {
     var url = req.url;
     htmlData = presentAirTableData();
+    console.log("Current Airspace Status in GET reqeust begin:");
+    console.log(airTableData);
     if (url === "/admin") {
       //console.log(req.method);
       res.writeHeader(200, { "Content-Type": "text/html" });
@@ -78,10 +81,10 @@ const server = http.createServer((req, res) => {
       res.end(htmlTextData);
 
       /*
-                              res.writeHeader(200, { "Content-Type": "text/html" });
-                              htmlTextData = htmlTextGP + htmlData + htmlTextEP;
-                              res.end(htmlTextData);
-                              */
+                                                      res.writeHeader(200, { "Content-Type": "text/html" });
+                                                      htmlTextData = htmlTextGP + htmlData + htmlTextEP;
+                                                      res.end(htmlTextData);
+                                                      */
     });
   }
 });
