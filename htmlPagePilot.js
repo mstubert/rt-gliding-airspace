@@ -142,7 +142,12 @@ var htmlText2 = initPic + convPic + endPic;
 var htmlText3 = `
             <h1>ACD Gliding Airspace</h1>
           </div>
-        </header>`;
+        </header>
+        <div class="weatherTable">
+          <p class="weatherLegend">Airspace</p>
+          <p class="weatherLegend">Status</p>
+          <p class="weatherLegend">Max Altitude/FL</p>
+        </div>`;
 
 var htmlTextEP = `  
     </div>
