@@ -144,7 +144,7 @@ var htmlText3 = `
           </div> 
           <button class="glob-button"> Share Airspace Status </button> 
         </header> 
-        <form class="share-form hidden" method="post" action="./admin">
+        <form class="share-form hidden" method="post" action="./">
         <p class=weather>Active Wind Mode: </p>
         <p class="weather" id="replace-me" style="color: blue">EAST EDDM RWY 08</p>
         <div>

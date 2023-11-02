@@ -73,15 +73,20 @@ const server = http.createServer((req, res) => {
       }
 
       htmlData = presentAirTableData();
-      //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
-      if (windM == "w") {
-        htmlTextData = htmlTextG + htmlData + htmlTextE;
-      }
-      if (windM == "e") {
-        htmlTextData = htmlTextGE + htmlData + htmlTextEE;
-      }
+      /*
+            //htmlTextData = htmlTextStart + htmlData + htmlTextEnd;
+            if (windM == "w") {
+              htmlTextData = htmlTextG + htmlData + htmlTextE;
+            }
+            if (windM == "e") {
+              htmlTextData = htmlTextGE + htmlData + htmlTextEE;
+            }
+            res.writeHeader(200, { "Content-Type": "text/html" });
+            //console.log(htmlTextData);
+            res.end(htmlTextData);
+            */
       res.writeHeader(200, { "Content-Type": "text/html" });
-      //console.log(htmlTextData);
+      htmlTextData = htmlTextGP + htmlData + htmlTextEP;
       res.end(htmlTextData);
     });
   }
