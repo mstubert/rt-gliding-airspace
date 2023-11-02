@@ -59,6 +59,7 @@ function transformBody(dataString) {
   statPos = dataString.substring(20, 22);
 
   console.log("---valid for transform---");
+  console.log(airTableData);
   console.log("airPos: ");
   console.log(airPos);
 
